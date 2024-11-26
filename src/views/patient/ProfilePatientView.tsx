@@ -22,7 +22,7 @@ export default function ProfilePatientView() {
   }, [queryClient]);
 
   const fetchProfile = async (): Promise<UserProfile> => {
-    const user = JSON.parse(localStorage.getItem("USER") || "{}");
+    const user = JSON.parse(localStorage.getItem("USER_PATIENT") || "{}");
     if (!user || !user.data?.id) {
       throw new Error("Usuario no encontrado en localStorage");
     }

@@ -15,11 +15,11 @@ interface Appointment {
 
 export default function OverView() {
   const [showModal, setShowModal] = useState(false);
-  const {data} = JSON.parse(localStorage.getItem("USER") || "{}");
+  const {data} = JSON.parse(localStorage.getItem("USER_PATIENT") || "{}");
   const fetchAppointments = async (): Promise<Appointment[]> => {
     
     const response = await axios.get(
-      `https://dl-mind-match.sliplane.app/v1/appointments/professional/${data.id}`
+      `https://dl-mind-match.sliplane.app/v1/appointments/patient/${data.id}`
     );
     return response.data.data;
   };

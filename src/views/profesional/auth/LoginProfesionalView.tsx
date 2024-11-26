@@ -1,4 +1,4 @@
-import { authenticatedUser, getProfesional, getUser } from "@/api/AuthAPI";
+import { authenticatedUser, getProfesional} from "@/api/AuthAPI";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";

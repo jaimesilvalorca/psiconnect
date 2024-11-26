@@ -22,12 +22,12 @@ export default function AppointmentsPatientView() {
   }, [queryClient]);
 
   const fetchAppointments = async (): Promise<Appointment[]> => {
-    const user = JSON.parse(localStorage.getItem("USER") || "{}");
+    const user = JSON.parse(localStorage.getItem("USER_PATIENT") || "{}");
     if (!user || !user.data?.id) {
       throw new Error("Usuario no encontrado en localStorage");
     }
     const response = await axios.get(
-      `https://dl-mind-match.sliplane.app/v1/appointments/professional/${user.data.id}`
+      `https://dl-mind-match.sliplane.app/v1/appointments/patient/${user.data.id}`
     );
     return response.data.data;
   };

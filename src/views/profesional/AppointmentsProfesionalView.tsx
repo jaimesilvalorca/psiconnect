@@ -21,7 +21,7 @@ export default function AppointmentsProfesionalView() {
     queryClient.removeQueries({ queryKey: ["appointments"] });
   }, [queryClient]);
 
-  const user = JSON.parse(localStorage.getItem("USER") || "{}");
+  const user = JSON.parse(localStorage.getItem("USER_PROFESIONAL") || "{}");
   const userId = user?.data?.id;
 
   const fetchAppointments = async (): Promise<Appointment[]> => {

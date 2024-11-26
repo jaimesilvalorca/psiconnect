@@ -7,7 +7,7 @@ export default function ProfesionalLogoutButton() {
 
   const handleLogout = () => {
     localStorage.removeItem('AUTH_TOKEN')
-    localStorage.removeItem('USER')
+    localStorage.removeItem('USER_PROFESIONAL')
     navigate("/profesional/auth/login");
 
   };

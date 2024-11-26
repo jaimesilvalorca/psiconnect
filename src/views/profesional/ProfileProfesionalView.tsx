@@ -23,7 +23,7 @@ export default function ProfileProfesionalView() {
   }, [queryClient]);
 
   const fetchProfile = async (): Promise<UserProfile> => {
-    const user = JSON.parse(localStorage.getItem("USER") || "{}");
+    const user = JSON.parse(localStorage.getItem("USER_PROFESIONAL") || "{}");
     if (!user || !user.data?.id) {
       throw new Error("Usuario no encontrado en localStorage");
     }

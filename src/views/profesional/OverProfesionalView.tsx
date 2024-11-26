@@ -17,7 +17,7 @@ export default function OverProfesionalView() {
   const [view, setView] = useState<"scheduled" | "cancelled" | "availability" | null>(null);
 
   const fetchAppointments = async (): Promise<Appointment[]> => {
-    const {data} = JSON.parse(localStorage.getItem("USER") || "{}");
+    const {data} = JSON.parse(localStorage.getItem("USER_PROFESIONAL") || "{}");
     const response = await axios.get(
       `https://dl-mind-match.sliplane.app/v1/appointments/professional/${data.id}`
     );
