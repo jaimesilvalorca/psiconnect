@@ -40,14 +40,14 @@ export async function authenticatedUser(formData: UserLogin) {
   }
 }
 
-export async function getUser(email:string){
+export async function getProfesional(email:string){
     try {
         
         const url = `/v1/users/email/${email}`
 
         const {data} = await apiORC.get(url)
 
-        localStorage.setItem('USER',JSON.stringify(data))
+        localStorage.setItem('USER_PROFESIONAL',JSON.stringify(data))
 
         return data
         
@@ -56,4 +56,22 @@ export async function getUser(email:string){
             throw new Error(error.response.data.error);
           }
     }
+}
+
+export async function getPatient(email:string){
+  try {
+      
+      const url = `/v1/users/email/${email}`
+
+      const {data} = await apiORC.get(url)
+
+      localStorage.setItem('USER_PATIENT',JSON.stringify(data))
+
+      return data
+      
+  } catch (error) {
+      if (isAxiosError(error) && error.response) {
+          throw new Error(error.response.data.error);
+        }
+  }
 }

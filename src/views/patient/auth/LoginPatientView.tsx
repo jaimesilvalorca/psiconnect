@@ -1,4 +1,4 @@
-import { authenticatedUser, getUser } from "@/api/AuthAPI";
+import { authenticatedUser, getPatient} from "@/api/AuthAPI";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ export default function LoginPatientView() {
   });
 
   const handleLogin = async(formData: UserLogin) => {
-    const {data} = await getUser(formData.email)
+    const {data} = await getPatient(formData.email)
     console.log(data)
 
     if(data.roles[0] !== 'user'){

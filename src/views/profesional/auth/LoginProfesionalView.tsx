@@ -1,4 +1,4 @@
-import { authenticatedUser, getUser } from "@/api/AuthAPI";
+import { authenticatedUser, getProfesional, getUser } from "@/api/AuthAPI";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ export default function LoginProfesionalView() {
   });
 
   const handleLogin = async(formData: UserLogin) => {
-    const {data} = await getUser(formData.email)
+    const {data} = await getProfesional(formData.email)
 
     
 

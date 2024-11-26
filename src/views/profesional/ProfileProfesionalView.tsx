@@ -9,6 +9,7 @@ interface UserProfile {
   email: string;
   roles: string[];
   status: string;
+  description?: string; // Añadida la descripción como opcional
   createdAt: string;
   updatedAt: string;
 }
@@ -84,15 +85,22 @@ export default function ProfileProfesionalView() {
                 <span className="font-semibold">Estado:</span>{" "}
                 <span
                   className={`px-3 py-1 rounded-full text-white ${
-                    profile?.status === "ACTIVE"
-                      ? "bg-green-500"
-                      : "bg-red-500"
+                    profile?.status === "ACTIVE" ? "bg-green-500" : "bg-red-500"
                   }`}
                 >
                   {profile?.status}
                 </span>
               </p>
             </div>
+          </div>
+
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">
+              Descripción
+            </h3>
+            <p className="text-gray-600">
+              {profile?.description || "Sin descripción disponible"}
+            </p>
           </div>
 
           <div className="mb-6">
