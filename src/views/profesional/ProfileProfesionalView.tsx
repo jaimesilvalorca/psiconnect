@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface UserProfile {
   id: string;
@@ -9,13 +10,14 @@ interface UserProfile {
   email: string;
   roles: string[];
   status: string;
-  description?: string; // Añadida la descripción como opcional
+  description?: string; // Descripción opcional
   createdAt: string;
   updatedAt: string;
 }
 
 export default function ProfileProfesionalView() {
   const queryClient = useQueryClient();
+  const [showModal, setShowModal] = useState(false);
 
   // Invalidar la query al cargar el componente
   useEffect(() => {
@@ -95,23 +97,12 @@ export default function ProfileProfesionalView() {
           </div>
 
           <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">
-              Descripción
-            </h3>
-            <p className="text-gray-600">
-              {profile?.description || "Sin descripción disponible"}
-            </p>
-          </div>
-
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Roles</h3>
-            <ul className="list-disc pl-5">
-              {profile?.roles.map((role, index) => (
-                <li key={index} className="text-gray-600 capitalize">
-                  {role}
-                </li>
-              ))}
-            </ul>
+            <button
+              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 transition"
+              onClick={() => setShowModal(true)}
+            >
+              Mostrar CV
+            </button>
           </div>
 
           <div className="mb-6">
@@ -127,6 +118,34 @@ export default function ProfileProfesionalView() {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[700px] max-h-[80vh] overflow-y-auto">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              Descripción Profesional
+            </h2>
+            <div className="text-gray-600 prose">
+              {profile?.description ? (
+                <ReactMarkdown>
+                  {profile.description.replace(/\\n/g, "\n")}
+                </ReactMarkdown>
+              ) : (
+                "Sin descripción disponible"
+              )}
+            </div>
+            <div className="mt-6 text-right">
+              <button
+                className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition"
+                onClick={() => setShowModal(false)}
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

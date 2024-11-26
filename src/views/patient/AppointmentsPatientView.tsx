@@ -16,7 +16,6 @@ interface Appointment {
 export default function AppointmentsPatientView() {
   const queryClient = useQueryClient();
 
-  // Invalidar las queries al cargar el componente
   useEffect(() => {
     queryClient.removeQueries({ queryKey: ["appointments"] });
   }, [queryClient]);
@@ -55,7 +54,7 @@ export default function AppointmentsPatientView() {
     );
   }
 
-  // Filtrar citas pasadas
+ 
   const today = new Date();
   const pastAppointments = appointments.filter((appointment) => {
     const appointmentDate = new Date(appointment.appointmentDate);

@@ -53,7 +53,7 @@ export default function OverProfesionalView() {
   const cancelled = todayAppointments.filter((a) => a.status === "cancelled");
 
   const calculateAvailability = () => {
-    const allHours = Array.from({ length: 12 }, (_, i) => 7 + i); // Horas de 7 a 18
+    const allHours = Array.from({ length: 12 }, (_, i) => 7 + i);
     const busyHours = scheduled.map((appointment) =>
       new Date(appointment.appointmentDate).getHours()
     );

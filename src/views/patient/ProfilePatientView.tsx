@@ -98,17 +98,6 @@ export default function ProfilePatientView() {
           </div>
 
           <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Roles</h3>
-            <ul className="list-disc pl-5">
-              {profile?.roles.map((role, index) => (
-                <li key={index} className="text-gray-600 capitalize">
-                  {role}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-700 mb-2">Fechas</h3>
             <p className="text-gray-600">
               <span className="font-semibold">Creado el:</span>{" "}
