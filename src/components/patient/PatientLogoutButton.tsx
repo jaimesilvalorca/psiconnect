@@ -7,6 +7,7 @@ export default function PatientLogoutButton() {
 
   const handleLogout = () => {
     localStorage.removeItem('AUTH_TOKEN')
+    localStorage.removeItem('USER')
     navigate("/patient/auth/login");
 
   };
