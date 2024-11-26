@@ -133,7 +133,7 @@ export default function LoginProfesionalView() {
             <p className="text-sm text-gray-600">
               ¿No tienes cuenta?{" "}
               <Link
-                to="/auth/register"
+                to="/profesional/auth/register"
                 className="text-indigo-600 hover:underline"
               >
                 Regístrate aquí
