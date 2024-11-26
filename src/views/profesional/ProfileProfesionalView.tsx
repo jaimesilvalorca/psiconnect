@@ -18,7 +18,7 @@ export default function ProfileProfesionalView() {
 
   // Invalidar la query al cargar el componente
   useEffect(() => {
-    queryClient.invalidateQueries(["userProfile"]);
+    queryClient.invalidateQueries({ queryKey: ["userProfile"] });
   }, [queryClient]);
 
   const fetchProfile = async (): Promise<UserProfile> => {
@@ -35,8 +35,7 @@ export default function ProfileProfesionalView() {
   const { data: profile, isFetching, error } = useQuery({
     queryKey: ["userProfile"],
     queryFn: fetchProfile,
-    staleTime: 0, // Forzar refetch inmediato
-    cacheTime: 0, // Evitar cache persistente
+    refetchOnWindowFocus: true, // Opcional: Refetch al enfocar la ventana
   });
 
   if (isFetching) {

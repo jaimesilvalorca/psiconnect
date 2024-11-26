@@ -1,6 +1,6 @@
 import { isAxiosError } from "axios";
-import apiDL from "@/lib/apiDL";
-import apiORC from "@/lib/apiORC";
+import apiDL from "../lib/apiDL";
+import apiORC from "../lib/apiORC";
 
 import { UserLogin, UserRegisterSend } from "types";
 

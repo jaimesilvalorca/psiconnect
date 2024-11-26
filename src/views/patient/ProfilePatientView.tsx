@@ -18,7 +18,7 @@ export default function ProfilePatientView() {
 
   // Invalidar la query al cargar el componente
   useEffect(() => {
-    queryClient.invalidateQueries(["userProfile"]);
+    queryClient.invalidateQueries({ queryKey: ["userProfile"] });
   }, [queryClient]);
 
   const fetchProfile = async (): Promise<UserProfile> => {
@@ -39,8 +39,7 @@ export default function ProfilePatientView() {
   } = useQuery({
     queryKey: ["userProfile"],
     queryFn: fetchProfile,
-    staleTime: 0, 
-    cacheTime: 0, 
+    staleTime: 0, // Forzar refetch inmediato
   });
 
   if (isFetching) {

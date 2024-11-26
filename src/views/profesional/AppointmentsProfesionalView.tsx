@@ -5,7 +5,7 @@ import { useEffect } from "react";
 interface Appointment {
   id: string;
   appointmentDate: string;
-  status: string; // Aunque no se use directamente, se incluye por consistencia
+  status: string; 
   description: string;
   patient: {
     firstName: string;
@@ -16,18 +16,21 @@ interface Appointment {
 export default function AppointmentsProfesionalView() {
   const queryClient = useQueryClient();
 
-  // Limpiar el cache de la query key cada vez que se carga el componente
+ 
   useEffect(() => {
-    queryClient.removeQueries(["appointments"]);
+    queryClient.removeQueries({ queryKey: ["appointments"] });
   }, [queryClient]);
 
-  const {data} = JSON.parse(localStorage.getItem("USER") || "{}");
-  console.log(data)
+  const user = JSON.parse(localStorage.getItem("USER") || "{}");
+  const userId = user?.data?.id;
+
   const fetchAppointments = async (): Promise<Appointment[]> => {
+    if (!userId) {
+      throw new Error("Usuario no encontrado en localStorage");
+    }
     const response = await axios.get(
-      `https://dl-mind-match.sliplane.app/v1/appointments/professional/${data.id}`
+      `https://dl-mind-match.sliplane.app/v1/appointments/professional/${userId}`
     );
-    console.log(response.data.data);
     return response.data.data;
   };
 
@@ -38,8 +41,17 @@ export default function AppointmentsProfesionalView() {
   } = useQuery({
     queryKey: ["appointments"],
     queryFn: fetchAppointments,
-    staleTime: 0, 
+    staleTime: 0, // Forzar refetch inmediato
+    enabled: Boolean(userId), // Solo ejecutar si existe `userId`
   });
+
+  if (!userId) {
+    return (
+      <div className="text-red-500 text-center mt-20">
+        <h2 className="text-2xl font-bold">Usuario no encontrado</h2>
+      </div>
+    );
+  }
 
   if (isFetching) {
     return (

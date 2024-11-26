@@ -5,7 +5,7 @@ import { useEffect } from "react";
 interface Appointment {
   id: string;
   appointmentDate: string;
-  status: string; 
+  status: string;
   description: string;
   patient: {
     firstName: string;
@@ -16,29 +16,26 @@ interface Appointment {
 export default function AppointmentsPatientView() {
   const queryClient = useQueryClient();
 
-
+  // Invalidar las queries al cargar el componente
   useEffect(() => {
-    queryClient.removeQueries(["appointments"]);
+    queryClient.removeQueries({ queryKey: ["appointments"] });
   }, [queryClient]);
 
-  const {data} = JSON.parse(localStorage.getItem("USER") || "{}");
-  console.log(data)
   const fetchAppointments = async (): Promise<Appointment[]> => {
+    const user = JSON.parse(localStorage.getItem("USER") || "{}");
+    if (!user || !user.data?.id) {
+      throw new Error("Usuario no encontrado en localStorage");
+    }
     const response = await axios.get(
-      `https://dl-mind-match.sliplane.app/v1/appointments/professional/${data.id}`
+      `https://dl-mind-match.sliplane.app/v1/appointments/professional/${user.data.id}`
     );
-    console.log(response.data.data);
     return response.data.data;
   };
 
-  const {
-    data: appointments = [],
-    isFetching,
-    error,
-  } = useQuery({
+  const { data: appointments = [], isFetching, error } = useQuery({
     queryKey: ["appointments"],
     queryFn: fetchAppointments,
-    staleTime: 0, 
+    staleTime: 0,
   });
 
   if (isFetching) {

@@ -50,6 +50,7 @@ export default function RegisterProfesionalView() {
       email: formData.email,
       password: formData.password,
       role: formData.role,
+      description:formData.description
     };
     mutate(dataSend);
   };
